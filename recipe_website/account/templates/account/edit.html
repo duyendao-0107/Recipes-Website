@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Edit your account{% endblock %}
+
+{% block content %}
+    
+    <div id="form">
+        <div class="container">
+            <div class="row justify-content-between gy-5">
+                <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+                    <h1>Edit your account</h1>
+                    <p>You can edit your account using the following form:</p>
+                </div>
+
+                <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+                    <form method="post" enctype="multipart/form-data">
+                        {{ user_form.as_p }}
+                        
+                        {{ profile_form.as_p }}
+                        
+                        {% csrf_token %}
+                        
+                        <p><input type="submit" value="Save changes"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>   
+    
+    
+    
+{% endblock %}
