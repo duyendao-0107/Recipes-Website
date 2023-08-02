@@ -28,6 +28,8 @@
         <!-- Template Main CSS File -->
         <link href="{% static "assets/css/main.css" %}" rel="stylesheet">
         <link href="{% static "assets/css/login.css" %}" rel="stylesheet">
+        <link href="{% static "assets/css/recipe.css" %}" rel="stylesheet">
+        <link href="{% static "assets/css/base.css" %}" rel="stylesheet">
 
         <!-- =======================================================
         * Template Name: Yummy
@@ -50,16 +52,25 @@
                 </a>
 
                 <nav id="navbar" class="navbar">
-                    {% if request.user.is_authenticated %}  
-                        <ul>
-                            <li><a href="#hero">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                            <li><a href="#menu">Menu List</a></li>
-                            <li><a href="#testimonials">People</a></li>
-                            <li><a href="#gallery">Gallery</a></li>
-                        </ul>
-                    {% endif %}
+                      
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#menu">Menu List</a></li>
+                        <li><a href="#testimonials">People</a></li>
+                        <li><a href="{% url "images:list" %}">Gallery</a></li>
+                        {% if request.user.is_authenticated %}
+                            <li class="dropdown"><a href="#"><span>Settings</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                                <ul>
+                                    <li><a href="{% url "edit" %}">Edit your profile</a></li>
+                                    <li><a href="{% url "password_change" %}">Change your password</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                    </ul>
+                    
                 </nav>
+                
 
                 <span class="user">
                     {% if request.user.is_authenticated %}
@@ -142,5 +153,27 @@
         <!-- Template Main JS File -->
         <script src="{% static "assets/js/main.js" %}"></script>
         <!-- <script src="{% static "js/login.js" %}"></script> -->
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
+
+        <script>
+            var csrftoken = Cookies.get('csrftoken');
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            
+            $.ajaxSetup({ beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            } });
+            
+            $(document).ready(function(){ 
+                {% block domready %}
+                {% endblock %} 
+            });
+        </script>
     </body>
 </html>

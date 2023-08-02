@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <!-- ======= Hero Section ======= -->
+    <section id="menu" class="hero d-flex align-items-center section-bg">
+        <div class="container">
+            <div class="row justify-content-between gy-5">
+                <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+                    <h2 data-aos="fade-up">{{ post.title }}<br></h2>
+
+                    <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
+
+                    <p data-aos="fade-up" data-aos-delay="100">{{ post.body|linebreaks }}</p>
+                    
+                    <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+                        <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+                    <img src="assets/img/hero-img.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
+                </div>
+            </div>
+        </div>
+    </section><!-- End Hero Section -->
+    
+    <div class="contact">
+        <div class="container">
+                    
+                {% with comments.count as total_comments %}
+                    <p>{{ total_comments }} comment{{ total_comments|pluralize }}</p>
+                {% endwith %}
+        
+                {% for comment in comments %}
+                    <div class="comment">
+                        <p class="info"> Comment {{ forloop.counter }} by {{ request.user.first_name }} {{ comment.created }} </p>
+                        {{ comment.body|linebreaks }}
+                    </div>
+                    {% empty %}
+                    <p>There are no comments yet.</p>
+                {% endfor %}
+        
+                <!-- <p>Add a new comment</p> -->
+                <form method="post"  class="comment-form p-3 p-md-4">
+                    {{ request.user.first_name }}
+                    
+                    <label for="id_username"></label>
+                    
+                    <div class="form-group">
+                        <textarea class="form-control" name="body" cols="40" rows="5" required="" id="id_body" placeholder="Add a new comment"></textarea>
+                    </div>
+                    
+                    {% csrf_token %}
+                    <div class="text-center"><button type="submit">Add comment</button></div>
+                </form>
+        
+                {% if new_comment %}
+                    <p>Your comment has been added.</p>
+                {% endif %}
+
+        </div>
+    </div>
+    
+
+    
+
+{% endblock %}

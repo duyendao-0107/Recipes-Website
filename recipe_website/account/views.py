@@ -5,10 +5,28 @@ from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.contrib import messages
+from recipe.models import Post
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-@login_required
 def home(request):
-    return render(request, 'account/home.html', {'section': 'home'})
+    object_list = Post.published.all()
+    
+    paginator = Paginator(object_list, 6)
+    
+    page = request.GET.get('page')
+    
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        posts = paginator.page(1)
+        
+    except EmptyPage:
+        # If page is out of range deliver last page of results
+        posts = paginator.page(paginator.num_pages)
+
+    return render(request, 'account/home.html', {'section': 'home', 
+                                                 'posts': posts})
 
 def register(request):
     if request.method == 'POST':
