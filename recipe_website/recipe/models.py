@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.utils.text import slugify
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -13,6 +14,9 @@ class Post(models.Model):
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipe_posts')
     body = models.TextField()
+    image = models.ImageField(upload_to='posts/image/%Y/%m/%d/')
+    video = models.FileField(upload_to='posts/video/%Y/%m/%d/')
+    url = models.URLField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -25,6 +29,12 @@ class Post(models.Model):
         
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        
+        super().save(*args, **kwargs)
     
     def get_absolute_url(self):
         return reverse('recipe:post_detail', args=[self.publish.year, self.publish.month, self.publish.day, self.slug])

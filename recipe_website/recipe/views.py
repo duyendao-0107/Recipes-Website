@@ -1,11 +1,15 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
-from .forms import CommentForm
+from .forms import CommentForm, PostCreateForm
+from images.models import Image
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.http import HttpResponseRedirect
 
-# def post_list(request):
-#     posts = Post.published.all()
+def post_list(request):
+    posts = Post.published.all()
     
-#     return render(request, 'recipe/post/list.html', {'posts': posts})
+    return render(request, 'recipe/post/list.html', {'posts': posts})
 
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(Post, slug=post, 
@@ -35,3 +39,22 @@ def post_detail(request, year, month, day, post):
                                                        'comments': comments, 
                                                        'new_comment': new_comment, 
                                                        'comment_form': comment_form})
+
+@login_required
+def post_create(request):
+    if request.method == 'POST':
+        
+        post_form = PostCreateForm(data=request.POST, files=request.FILES)
+        
+        if post_form.is_valid ():
+            post_form.save()
+
+            messages.success(request, 'Post updated successfully')
+            return HttpResponseRedirect("/menu/")
+        else:
+            messages.error(request, 'Error updating your profile')
+       
+    else:
+        post_form = PostCreateForm(data=request.GET)
+            
+    return render(request, 'recipe/post/create.html', {'post_form': post_form})

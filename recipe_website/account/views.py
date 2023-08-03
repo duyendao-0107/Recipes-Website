@@ -7,9 +7,12 @@ from .models import Profile
 from django.contrib import messages
 from recipe.models import Post
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from images.models import Image
 
 def home(request):
     object_list = Post.published.all()
+    
+    images = Image.objects.all()
     
     paginator = Paginator(object_list, 6)
     
@@ -26,7 +29,8 @@ def home(request):
         posts = paginator.page(paginator.num_pages)
 
     return render(request, 'account/home.html', {'section': 'home', 
-                                                 'posts': posts})
+                                                 'posts': posts, 
+                                                 'images': images})
 
 def register(request):
     if request.method == 'POST':

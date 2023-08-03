@@ -135,22 +135,24 @@
                         <div class="row gy-5">
 
                             {% for post in posts %}
-                                <div class="col-lg-4 menu-item">
-                                    <a href="assets/img/menu/menu-item-1.png" class="glightbox"><img src="assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
-                                    
-                                    <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
-                                    
-                                    <p class="ingredients">
-                                        {{ post.body|truncatewords:30|linebreaks }}
-                                    </p>
-                                    
-                                    <p class="price">
-                                        1000 views 
-                                    </p>
+                                {% for image in images %}
+                                    <div class="col-lg-4 menu-item">
+                                        <a href="{{ post.get_absolute_url }}"><img src="{{ image.url }}" class="menu-img img-fluid" alt=""></a>
+                                        
+                                        <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
+                                        
+                                        <p class="ingredients">
+                                            {{ post.body|truncatewords:30|linebreaks }}
+                                        </p>
+                                        
+                                        <p class="price">
+                                            1000 views 
+                                        </p>
 
-                                    <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
-                                    
-                                </div><!-- Menu Item -->
+                                        <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
+                                        
+                                    </div><!-- Menu Item -->
+                                {% endfor %}
                             {% endfor %}
             
                         </div>
@@ -166,22 +168,24 @@
                         <div class="row gy-5">
 
                             {% for post in posts %}
-                                <div class="col-lg-4 menu-item">
-                                    <a href="assets/img/menu/menu-item-1.png" class="glightbox"><img src="assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
-                                    
-                                    <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
-                                    
-                                    <p class="ingredients">
-                                        {{ post.body|truncatewords:30|linebreaks }}
-                                    </p>
-                                    
-                                    <p class="price">
-                                    1000 views 
-                                    </p>
+                                {% for image in images %}
+                                    <div class="col-lg-4 menu-item">
+                                        <a href="{{ post.get_absolute_url }}"><img src="{{ image.url }}" class="menu-img img-fluid" alt=""></a>
+                                        
+                                        <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
+                                        
+                                        <p class="ingredients">
+                                            {{ post.body|truncatewords:30|linebreaks }}
+                                        </p>
+                                        
+                                        <p class="price">
+                                            1000 views 
+                                        </p>
 
-                                    <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
-                                    
-                                </div><!-- Menu Item -->
+                                        <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
+                                        
+                                    </div><!-- Menu Item -->
+                                {% endfor %}
                             {% endfor %}
             
                         </div>
@@ -197,9 +201,10 @@
             
                         <div class="row gy-5">
 
-                                {% for post in posts %}
+                            {% for post in posts %}
+                                {% for image in images %}
                                     <div class="col-lg-4 menu-item">
-                                        <a href="assets/img/menu/menu-item-1.png" class="glightbox"><img src="assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
+                                        <a href="{{ post.get_absolute_url }}"><img src="{{ image.url }}" class="menu-img img-fluid" alt=""></a>
                                         
                                         <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
                                         
@@ -208,13 +213,14 @@
                                         </p>
                                         
                                         <p class="price">
-                                        1000 views 
+                                            1000 views 
                                         </p>
 
                                         <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
                                         
                                     </div><!-- Menu Item -->
                                 {% endfor %}
+                            {% endfor %}
                 
                         </div>
                         
@@ -230,22 +236,24 @@
                         <div class="row gy-5">
 
                             {% for post in posts %}
-                                <div class="col-lg-4 menu-item">
-                                    <a href="assets/img/menu/menu-item-1.png" class="glightbox"><img src="assets/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
-                                    
-                                    <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
-                                    
-                                    <p class="ingredients">
-                                        {{ post.body|truncatewords:30|linebreaks }}
-                                    </p>
-                                    
-                                    <p class="price">
-                                    1000 views 
-                                    </p>
+                                {% for image in images %}
+                                    <div class="col-lg-4 menu-item">
+                                        <a href="{{ post.get_absolute_url }}"><img src="{{ image.url }}" class="menu-img img-fluid" alt=""></a>
+                                        
+                                        <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
+                                        
+                                        <p class="ingredients">
+                                            {{ post.body|truncatewords:30|linebreaks }}
+                                        </p>
+                                        
+                                        <p class="price">
+                                            1000 views 
+                                        </p>
 
-                                    <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
-                                    
-                                </div><!-- Menu Item -->
+                                        <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
+                                        
+                                    </div><!-- Menu Item -->
+                                {% endfor %}
                             {% endfor %}
             
                         </div>

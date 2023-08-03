@@ -29,7 +29,6 @@
         <link href="{% static "assets/css/main.css" %}" rel="stylesheet">
         <link href="{% static "assets/css/login.css" %}" rel="stylesheet">
         <link href="{% static "assets/css/recipe.css" %}" rel="stylesheet">
-        <link href="{% static "assets/css/base.css" %}" rel="stylesheet">
 
         <!-- =======================================================
         * Template Name: Yummy
@@ -64,6 +63,7 @@
                                 <ul>
                                     <li><a href="{% url "edit" %}">Edit your profile</a></li>
                                     <li><a href="{% url "password_change" %}">Change your password</a></li>
+                                    <li><a href="{% url "post_create" %}">Create your recipe</a></li>
                                 </ul>
                             </li>
                         {% endif %}
@@ -152,7 +152,6 @@
 
         <!-- Template Main JS File -->
         <script src="{% static "assets/js/main.js" %}"></script>
-        <!-- <script src="{% static "js/login.js" %}"></script> -->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js"></script>
