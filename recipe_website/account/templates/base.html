@@ -12,6 +12,7 @@
         <!-- Favicons -->
         <link href="{% static "assets/img/favicon.png" %}" rel="icon">
         <link href="{% static "assets/img/apple-touch-icon.png" %}" rel="apple-touch-icon">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,6 +65,7 @@
                                     <li><a href="{% url "edit" %}">Edit your profile</a></li>
                                     <li><a href="{% url "password_change" %}">Change your password</a></li>
                                     <li><a href="{% url "post_create" %}">Create your recipe</a></li>
+                                    <li><a href="{% url "post_list" %}">Your post list</a></li>
                                 </ul>
                             </li>
                         {% endif %}

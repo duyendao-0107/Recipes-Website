@@ -10,7 +10,18 @@
                 <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
                     <h2 data-aos="fade-up">{{ post.title }}<br></h2>
 
-                    <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
+                    <div class="checked">
+                        <span class="heading">User Rating</span>
+                        <span class="fa fa-star fa-2x checked"></span>
+                        <span class="fa fa-star fa-2x checked"></span>
+                        <span class="fa fa-star fa-2x checked"></span>
+                        <span class="fa fa-star fa-2x checked"></span>
+                        <span class="fa fa-star fa-2x"></span>
+                    </div>
+
+                    <p class="date"> Published {{ post.publish }} by {{ post.author }} 
+                        
+                    </p>
 
                     <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
 
@@ -45,7 +56,7 @@
                 {% endfor %}
         
                 <!-- Add a new comment -->
-                <form method="post"  class="comment-form p-3 p-md-4">
+                <form method="post" class="comment-form p-3 p-md-4">
                     {{ request.user.first_name }}
                     
                     <label for="id_username"></label>

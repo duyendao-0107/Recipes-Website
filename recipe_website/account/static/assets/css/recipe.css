@@ -34,3 +34,7 @@ p.date {
     border-radius: 50px;
     margin-top: 1rem!important;
 }
+/* rating */
+.checked {
+    color: orange;
+}

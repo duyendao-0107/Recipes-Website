@@ -9,4 +9,5 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('edit/', views.edit, name='edit'),
     path('create/', recipe.views.post_create, name='post_create'),
+    path('your-post-list/', recipe.views.post_list, name='post_list'),
 ]

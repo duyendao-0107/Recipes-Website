@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'recipe.apps.RecipeConfig',
     'images.apps.ImagesConfig',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +145,5 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
 ]
+
+# STAR_RATINGS_STAR_SPRITE="/static/star-ratings/images/stars.png"
