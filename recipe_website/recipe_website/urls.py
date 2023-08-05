@@ -25,7 +25,6 @@ urlpatterns = [
     # path('social-auth/', include('social_django.urls', namespace='social' )),
     path('menu/', include('recipe.urls', namespace='recipe')),
     path('images/', include('images.urls', namespace='images')),
-    path('ratings/', include('star_ratings.urls', namespace='ratings')),
 ]
 
 if settings.DEBUG:

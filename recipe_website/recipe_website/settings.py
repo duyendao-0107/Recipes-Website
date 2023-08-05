@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django_extensions',
     'recipe.apps.RecipeConfig',
     'images.apps.ImagesConfig',
-    'star_ratings',
 ]
 
 MIDDLEWARE = [
@@ -146,4 +145,9 @@ AUTHENTICATION_BACKENDS = [
     'account.authentication.EmailAuthBackend',
 ]
 
-# STAR_RATINGS_STAR_SPRITE="/static/star-ratings/images/stars.png"
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'

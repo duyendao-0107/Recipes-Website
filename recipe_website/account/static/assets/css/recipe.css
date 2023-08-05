@@ -63,3 +63,7 @@ items {
     transition-property: transform;
     box-sizing: content-box;
 }
+
+.search{
+    padding: 80px 0;
+}

@@ -10,4 +10,6 @@ urlpatterns = [
     path('edit/', views.edit, name='edit'),
     path('create/', recipe.views.post_create, name='post_create'),
     path('your-post-list/', recipe.views.post_list, name='post_list'),
+    path('search/', recipe.views.SearchResultsView.as_view(), name="search_results"),
+    path('ranking/', recipe.views.post_ranking, name='ranking'),
 ]

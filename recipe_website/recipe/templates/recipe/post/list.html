@@ -63,7 +63,7 @@
                                 </p>
                                 
                                 <p class="price">
-                                    1000 views 
+                                    <span class="count"> {{ post.total_views }} view{{ post.total_views|pluralize }} </span>
                                 </p>
 
                                 <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
@@ -95,7 +95,7 @@
                                     </p>
                                     
                                     <p class="price">
-                                        1000 views 
+                                        <span class="count"> {{ post.total_views }} view{{ post.total_views|pluralize }} </span>
                                     </p>
 
                                     <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
@@ -129,7 +129,7 @@
                                     </p>
                                     
                                     <p class="price">
-                                        1000 views 
+                                        <span class="count"> {{ post.total_views }} view{{ post.total_views|pluralize }} </span>
                                     </p>
 
                                     <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
@@ -163,7 +163,7 @@
                                     </p>
                                     
                                     <p class="price">
-                                        1000 views 
+                                        <span class="count"> {{ total_views }} view{{ total_views|pluralize }} </span>
                                     </p>
 
                                     <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
@@ -180,5 +180,8 @@
 
         </div>
     </section><!-- End Menu Section -->
+
+
+    {% include "pagination.html" with page=posts %}
 
 {% endblock %}

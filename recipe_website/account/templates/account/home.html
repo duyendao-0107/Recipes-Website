@@ -17,7 +17,7 @@
             </div>
             </div>
             <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
-            <img src="assets/img/hero-img.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
+            <img src="http://127.0.0.1:8000/media/images/2023/08/06/hero-img.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
             </div>
         </div>
         </div>
@@ -35,7 +35,7 @@
                 </div>
         
                 <div class="row gy-4">
-                    <img class="col-lg-7 position-relative about-img" src="assets/img/about.jpg" data-aos="fade-up" data-aos-delay="150" alt="">
+                    <img class="col-lg-7 position-relative about-img" src="http://127.0.0.1:8000/media/images/2023/08/06/about.jpg" data-aos="fade-up" data-aos-delay="150" alt="">
                     <div class="col-lg-5 d-flex align-items-end" data-aos="fade-up" data-aos-delay="300">
                         <div class="content ps-0 ps-lg-5">
                             <p class="fst-italic">
@@ -44,7 +44,7 @@
                                 to separate dishes for each type of food such as hot pot, soup, porridge, salad, tea... everything is available at this website.
                             </p>
                             <div class="position-relative mt-4">
-                                <img src="assets/img/about-2.jpg" class="img-fluid" alt="">
+                                <img src="http://127.0.0.1:8000/media/images/2023/08/06/about-2.jpg" class="img-fluid" alt="">
                                 <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox play-btn"></a>
                             </div>
                         </div>
@@ -145,7 +145,7 @@
                                     </p>
                                     
                                     <p class="price">
-                                        1000 views 
+                                        <span class="count"> {{ recipe.views.post_detail.total_views }} view{{ recipe.views.total_views|pluralize }} </span>
                                     </p>
 
                                     <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
@@ -176,7 +176,7 @@
                                     </p>
                                     
                                     <p class="price">
-                                        1000 views 
+                                        <span class="count"> {{ total_views }} view{{ total_views|pluralize }} </span>
                                     </p>
 
                                     <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>

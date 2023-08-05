@@ -25,6 +25,8 @@
                         <div id="confirm-box"></div>
                     </p>
 
+                    <span class="count"> {{ total_views }} view{{ total_views|pluralize }} </span>
+
 
                     {% if post.image %}
                         <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
