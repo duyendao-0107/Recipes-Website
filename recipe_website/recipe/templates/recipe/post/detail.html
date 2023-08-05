@@ -13,21 +13,30 @@
                     <p></p>
 
                     <p class="date"> Published {{ post.publish }} by {{ post.author }} 
-                        <span class="heading">User Rating</span>
-                        <span class="fa fa-star fa-2x checked" style="color: orange" id="one"></span>
-                        <span class="fa fa-star fa-2x checked" style="color: orange" id="two"></span>
-                        <span class="fa fa-star fa-2x checked" style="color: orange" id="three"></span>
-                        <span class="fa fa-star fa-2x checked" style="color: orange" id="four"></span>
-                        <span class="fa fa-star fa-2x" id="five"></span>
+                        <form class="rate-form" method="post" id="{{ post.id }}">
+                            {% csrf_token %}
+                            <button type="submit" class="fa fa-star fa-2x my-btn" id="one"></button>
+                            <button type="submit" class="fa fa-star fa-2x my-btn" id="two"></button>
+                            <button type="submit" class="fa fa-star fa-2x my-btn" id="three"></button>
+                            <button type="submit" class="fa fa-star fa-2x my-btn" id="four"></button>
+                            <button type="submit" class="fa fa-star fa-2x my-btn" id="five"></button>
+                        </form>
+                        
+                        <div id="confirm-box"></div>
                     </p>
 
-                    <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+
+                    {% if post.image %}
+                        <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                    {% endif %}
 
                     <p data-aos="fade-up" data-aos-delay="100">{{ post.body|linebreaks }}</p>
 
-                    <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-                        <a href="{{ post.video.url }}" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
-                    </div>
+                    {% if post.video %}
+                        <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+                            <a href="{{ post.video.url }}" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+                        </div>
+                    {% endif %}
                 </div>
                 
                 <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">

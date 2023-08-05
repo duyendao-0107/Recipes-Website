@@ -1,5 +1,4 @@
-
-    <!-- ======= Gallery Section ======= -->
+<!-- ======= Gallery Section ======= -->
 <section id="gallery" class="gallery section-bg">
     <div class="container" data-aos="fade-up">
 
@@ -8,29 +7,32 @@
         <p>Check <span>Our Gallery</span></p>
       </div>
 
-      {% for image in images %}
       <div class="gallery-slider swiper">
         <div class="swiper-wrapper align-items-center">
-          <div class="swiper-slide">
-            <a class="glightbox" data-gallery="images-gallery" href="{{ image.get_absolute_url }}">
-                <a>
-                    
-                </a>
+          {% for image in images %}
+            <div id="items-width">
+              
+              <a class="glightbox" data-gallery="images-gallery" href="{{ image.get_absolute_url }}">
                 <a href="{{ image.get_absolute_url }}">
-                    <img src="{{ image.url }}" class="img-fluid" alt="">
+                  <img src="{{ image.image.url }}" class="img-fluid" alt="">
                 </a>
-            </a>
-          </div>
+              </a>
+
+              <div class="info">
+                <a href="{{ image.get_absolute_url }}" class="title" >
+                    {{ image.title }}
+                </a>
+              </div>
+              
+            </div>
+
+          {% endfor %}
+
+          <div class="swiper-pagination"></div>
         </div>
+
         <div class="swiper-pagination"></div>
       </div>
-      <div class="info">
-        <a href="{{ image.get_absolute_url }}" class="title" >
-            {{ image.title }}
-        </a>
-    </div>
-
-      {% endfor %}
 
     </div>
 </section><!-- End Gallery Section -->

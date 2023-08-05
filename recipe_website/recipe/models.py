@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.text import slugify
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -23,6 +24,12 @@ class Post(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     objects = models.Manager() # The default manager.
     published = PublishedManager() # Our custom manager.
+    score = models.IntegerField(default=0, 
+        validators=[
+            MaxValueValidator(5),
+            MinValueValidator(0),
+        ]
+    )
     
     class Meta:
         ordering = ('-publish',)

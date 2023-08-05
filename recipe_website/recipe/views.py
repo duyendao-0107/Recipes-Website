@@ -4,7 +4,8 @@ from .forms import CommentForm, PostCreateForm
 from images.models import Image
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
+from common.decorators import ajax_required, is_ajax
 
 def post_list(request):
     posts = Post.published.all()
@@ -21,6 +22,7 @@ def post_detail(request, year, month, day, post):
     # List of active comments for this post
     comments = post.comments.filter(active=True)
     new_comment = None
+    
     if request.method == 'POST':
         # A comment was posted
         comment_form = CommentForm(data=request.POST)
@@ -34,6 +36,8 @@ def post_detail(request, year, month, day, post):
             new_comment.save()
     else:
         comment_form = CommentForm()
+    
+    # obj = Post.objects.filter(score=0).order_by("?").first()
     
     return render(request, 'recipe/post/detail.html', {'post': post,
                                                        'comments': comments, 
@@ -58,3 +62,16 @@ def post_create(request):
         post_form = PostCreateForm(data=request.GET)
             
     return render(request, 'recipe/post/create.html', {'post_form': post_form})
+
+def rate_post(request):
+    if request.method == 'POST':
+        el_id = request.POST.get('el_id')
+        print(el_id)
+        val = request.POST.get('val')
+        obj = Post.objects.get(id=el_id)
+        obj.score = val
+        obj.save()
+        
+        return JsonResponse({'success': 'true', 'score': val}, safe=False)
+    
+    return JsonResponse({'success': 'false'})

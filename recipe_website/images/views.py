@@ -4,6 +4,7 @@ from django.contrib import messages
 from .forms import ImageCreateForm
 from django.shortcuts import get_object_or_404
 from .models import Image
+from recipe.models import Post
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -60,7 +61,7 @@ def image_like(request):
 
 @login_required
 def image_list(request):
-    images = Image.objects.all()
+    images = Post.objects.all()
     paginator = Paginator(images, 8)
     page = request.GET.get('page')
     
