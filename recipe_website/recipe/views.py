@@ -99,7 +99,7 @@ def post_create(request):
 def rate_post(request):
     if request.method == 'POST':
         el_id = request.POST.get('el_id')
-        action = request.POST.get('action')
+        # action = request.POST.get('action')
         
         val = request.POST.get('val')
         obj = Post.objects.get(id=el_id)
