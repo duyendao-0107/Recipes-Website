@@ -16,6 +16,7 @@ r = redis.Redis(host=settings.REDIS_HOST,
                 port=settings.REDIS_PORT, 
                 db=settings.REDIS_DB)
 
+@login_required
 def post_list(request):
     object_list = Post.published.all()
 
@@ -32,8 +33,6 @@ def post_list(request):
     except EmptyPage:
         # If page is out of range deliver last page of results
         posts = paginator.page(paginator.num_pages)
-
-    print(page)
     
     return render(request, 'recipe/post/list.html', {'posts': posts,
                                                      'page': page})
@@ -77,6 +76,26 @@ def post_detail(request, year, month, day, post):
                                                        'comment_form': comment_form,
                                                        'total_views': total_views})
 
+def post_detail_home(request, year, month, day, post):
+    post = get_object_or_404(Post, slug=post, 
+                             status='published', 
+                             publish__year=year, 
+                             publish__month=month, 
+                             publish__day=day)
+    
+    # List of active comments for this post
+    comments = post.comments.filter(active=True)
+
+    # increment total post views by 1
+    total_views = r.incr(f'post:{post.id}:views')
+
+    # increment post ranking by 1
+    r.zincrby('post_ranking', 1, post.id)
+    
+    return render(request, 'account/detail.html', {'post': post,
+                                                   'comments': comments,
+                                                   'total_views': total_views})
+
 @login_required
 def post_create(request):
     if request.method == 'POST':
@@ -96,6 +115,7 @@ def post_create(request):
             
     return render(request, 'recipe/post/create.html', {'post_form': post_form})
 
+@login_required
 def rate_post(request):
     if request.method == 'POST':
         el_id = request.POST.get('el_id')

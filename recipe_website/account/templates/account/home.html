@@ -136,16 +136,19 @@
 
                             {% for post in posts %}
                                 <div class="col-lg-4 menu-item">
-                                    <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
-                                    
-                                    <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
-                                    
+                                    {% if request.user.is_authenticated %}
+                                        <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                                        
+                                        <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
+
+                                    {% else %}
+                                        <a href="{{ post.get_absolute_url_home }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                                        
+                                        <h4><a href="{{ post.get_absolute_url_home }}"> {{ post.title }} </a></h4>
+                                    {% endif %}
+
                                     <p class="ingredients">
                                         {{ post.body|truncatewords:30|linebreaks }}
-                                    </p>
-                                    
-                                    <p class="price">
-                                        <span class="count"> {{ recipe.views.post_detail.total_views }} view{{ recipe.views.total_views|pluralize }} </span>
                                     </p>
 
                                     <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
@@ -167,16 +170,19 @@
 
                             {% for post in posts %}
                                 <div class="col-lg-4 menu-item">
-                                    <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
-                                    
-                                    <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
+                                    {% if request.user.is_authenticated %}
+                                        <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                                        
+                                        <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
+
+                                    {% else %}
+                                        <a href="{{ post.get_absolute_url_home }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                                        
+                                        <h4><a href="{{ post.get_absolute_url_home }}"> {{ post.title }} </a></h4>
+                                    {% endif %}
                                     
                                     <p class="ingredients">
                                         {{ post.body|truncatewords:30|linebreaks }}
-                                    </p>
-                                    
-                                    <p class="price">
-                                        <span class="count"> {{ total_views }} view{{ total_views|pluralize }} </span>
                                     </p>
 
                                     <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
@@ -197,26 +203,29 @@
             
                         <div class="row gy-5">
 
-                            {% for post in posts %}
-                                <div class="col-lg-4 menu-item">
-                                    <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
-                                    
-                                    <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
-                                    
-                                    <p class="ingredients">
-                                        {{ post.body|truncatewords:30|linebreaks }}
-                                    </p>
-                                    
-                                    <p class="price">
-                                        1000 views 
-                                    </p>
-
-                                    <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
-                                    
-                                </div><!-- Menu Item -->
-                            {% endfor %}
+                                {% for post in posts %}
+                                    <div class="col-lg-4 menu-item">
+                                        {% if request.user.is_authenticated %}
+                                            <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                                            
+                                            <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
+    
+                                        {% else %}
+                                            <a href="{{ post.get_absolute_url_home }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                                            
+                                            <h4><a href="{{ post.get_absolute_url_home }}"> {{ post.title }} </a></h4>
+                                        {% endif %}
+                                        
+                                        <p class="ingredients">
+                                            {{ post.body|truncatewords:30|linebreaks }}
+                                        </p>
+    
+                                        <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
+                                        
+                                    </div><!-- Menu Item -->
+                                {% endfor %}
                 
-                        </div>
+                            </div>
                         
                     </div><!-- End Lunch Menu Content -->
         
@@ -229,26 +238,29 @@
             
                         <div class="row gy-5">
 
-                            {% for post in posts %}
-                                <div class="col-lg-4 menu-item">
-                                    <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
-                                    
-                                    <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
-                                    
-                                    <p class="ingredients">
-                                        {{ post.body|truncatewords:30|linebreaks }}
-                                    </p>
-                                    
-                                    <p class="price">
-                                        1000 views 
-                                    </p>
-
-                                    <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
-                                    
-                                </div><!-- Menu Item -->
-                            {% endfor %}
-            
-                        </div>
+                                {% for post in posts %}
+                                    <div class="col-lg-4 menu-item">
+                                        {% if request.user.is_authenticated %}
+                                            <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                                            
+                                            <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
+    
+                                        {% else %}
+                                            <a href="{{ post.get_absolute_url_home }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                                            
+                                            <h4><a href="{{ post.get_absolute_url_home }}"> {{ post.title }} </a></h4>
+                                        {% endif %}
+                                        
+                                        <p class="ingredients">
+                                            {{ post.body|truncatewords:30|linebreaks }}
+                                        </p>
+    
+                                        <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
+                                        
+                                    </div><!-- Menu Item -->
+                                {% endfor %}
+                
+                            </div>
                         
                     </div><!-- End Dinner Menu Content -->
         

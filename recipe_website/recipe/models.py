@@ -39,6 +39,9 @@ class Post(models.Model):
     
     def get_absolute_url(self):
         return reverse('recipe:post_detail', args=[self.publish.year, self.publish.month, self.publish.day, self.slug])
+    
+    def get_absolute_url_home(self):
+        return reverse('recipe:post_detail_home', args=[ self.slug, self.publish.year, self.publish.month, self.publish.day])
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
