@@ -32,9 +32,7 @@ class Post(models.Model):
     )
     servings = models.IntegerField(default=0)
     ingredients = models.TextField(blank=True)
-    direction_step_number = models.IntegerField(default=0)
     direction_step = models.TextField(blank=True)
-    direction_body = models.TextField(blank=True)
     nutrition_calories = models.IntegerField(default=0)
     nutrition_carbs = models.IntegerField(default=0)
     nutrition_protein = models.IntegerField(default=0)
@@ -51,6 +49,12 @@ class Post(models.Model):
     
     def get_absolute_url_home(self):
         return reverse('recipe:post_detail_home', args=[ self.slug, self.publish.year, self.publish.month, self.publish.day])
+    
+    def get_absolute_url_edit_recipe(self):
+        return reverse('recipe:edit_recipe', args=[self.id,])
+    
+    def get_absolute_url_delete_recipe(self):
+        return reverse('recipe:delete_recipe', args=[self.id,])
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')

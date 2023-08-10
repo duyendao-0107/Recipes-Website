@@ -1,9 +1,10 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
-from .forms import CommentForm, PostCreateForm
+from .forms import CommentForm, PostCreateForm, PostEditForm
 from images.models import Image
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.http import HttpResponseRedirect, JsonResponse
 from django.views.generic import ListView
@@ -154,3 +155,32 @@ def post_ranking(request):
     
     return render(request, 'recipe/post/ranking.html', {'section': 'posts',
                                                         'most_viewed': most_viewed})
+
+@login_required
+def edit(request, post_id):
+    post = Post.objects.get(id=post_id)
+
+    if request.method == 'POST':
+        post_form = PostEditForm(instance=post, data=request.POST, files=request.FILES)
+        
+        if post_form.is_valid ():
+            post_form.save()
+
+            return HttpResponseRedirect('/menu/')
+
+            # messages.success(request, 'Post updated successfully')
+            # return HttpResponseRedirect("/your-post-list/")
+        else:
+            messages.error(request, 'Error updating your post')
+    else:
+        post_form = PostEditForm(instance=post)
+            
+    return render(request, 'recipe/post/edit.html', {'post': post,
+                                                     'post_form': post_form})
+
+@login_required
+def delete(request, post_id=None):
+    post_to_delete=Post.objects.get(id=post_id)
+    post_to_delete.delete()
+
+    return HttpResponseRedirect('/menu/')

@@ -7,7 +7,7 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')),
     path('', views.home, name='home'),
     path('register/', views.register, name='register'),
-    path('edit/', views.edit, name='edit'),
+    path('edit-profile/', views.edit, name='edit'),
     path('create/', recipe.views.post_create, name='post_create'),
     path('your-post-list/', recipe.views.post_list, name='post_list'),
     path('search/', recipe.views.SearchResultsView.as_view(), name="search_results"),

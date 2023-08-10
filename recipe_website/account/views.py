@@ -1,13 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login
-from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
+from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm, EmailPostForm
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.contrib import messages
 from recipe.models import Post
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from images.models import Image
+from django.core.mail import send_mail
+from django.contrib.auth.models import User
 
 def home(request):
     object_list = Post.published.all()
@@ -75,3 +77,25 @@ def edit(request):
         profile_form = ProfileEditForm(instance=request.user.profile)
             
     return render(request, 'account/edit.html', {'user_form': user_form, 'profile_form': profile_form})
+
+def pw_reset_for_email(request, username=None):
+    # Retrieve post by id
+    user = User.objects.get(email=username)
+    sent = False
+    if request.method == 'POST':
+        # Form was submitted
+        form = EmailPostForm(request.POST)
+        if form.is_valid():
+            # Form fields passed validation
+            cd = form.cleaned_data
+            # ... send email
+            # user_url = request.build_absolute_uri({{ protocol }}://{{ domain }})
+            subject = f"Someone asked for password reset for email " f"{cd['email']}" f"{cd['username']}"
+            message = f"Follow the link below:\n \n\n" "Your username, in case you've forgotten: " f"{cd['username']}"
+            send_mail(subject, message, 'recipe@gmail.com', [cd['to']])
+            sent = True
+
+    else:
+        form = EmailPostForm()
+    return render(request, 'registration/password_reset_confirm.html', {'form': form,
+                                                                        'sent': sent})

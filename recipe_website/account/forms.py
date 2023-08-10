@@ -27,3 +27,10 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('date_of_birth', 'photo')
+
+class EmailPostForm(forms.Form):
+    to = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ('username', 'email')

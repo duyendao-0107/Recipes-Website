@@ -9,4 +9,13 @@ class CommentForm(forms.ModelForm):
 class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'slug', 'author', 'body', 'image', 'video', 'status')
+        fields = ('title', 'slug', 'author', 'body', 'image', 'video', 'status', 
+                  'servings', 'ingredients', 'direction_step', 'nutrition_calories', 
+                  'nutrition_carbs', 'nutrition_protein', 'nutrition_fat')
+
+class PostEditForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('title', 'slug', 'author', 'body', 'image', 'video', 'status', 
+                  'servings', 'ingredients', 'direction_step', 'nutrition_calories', 
+                  'nutrition_carbs', 'nutrition_protein', 'nutrition_fat')
