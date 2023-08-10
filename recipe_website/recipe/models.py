@@ -14,7 +14,7 @@ class Post(models.Model):
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipe_posts')
-    body = models.TextField()
+    body = models.TextField(blank=True)
     image = models.ImageField(upload_to='posts/image/%Y/%m/%d/', blank=True)
     video = models.FileField(upload_to='posts/video/%Y/%m/%d/', blank=True)
     url = models.URLField()
@@ -30,6 +30,15 @@ class Post(models.Model):
             MinValueValidator(0),
         ]
     )
+    servings = models.IntegerField(default=0)
+    ingredients = models.TextField(blank=True)
+    direction_step_number = models.IntegerField(default=0)
+    direction_step = models.TextField(blank=True)
+    direction_body = models.TextField(blank=True)
+    nutrition_calories = models.IntegerField(default=0)
+    nutrition_carbs = models.IntegerField(default=0)
+    nutrition_protein = models.IntegerField(default=0)
+    nutrition_fat = models.IntegerField(default=0)
     
     class Meta:
         ordering = ('-publish',)

@@ -10,13 +10,59 @@
                 <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
                     <h2 data-aos="fade-up">{{ post.title }}<br></h2>
 
-                    <p></p>
-
                     <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
 
                     <span class="count"> {{ total_views }} view{{ total_views|pluralize }} </span>
 
                     <p data-aos="fade-up" data-aos-delay="100">{{ post.body|linebreaks }}</p>
+
+                    {% if post.servings %}
+                        <div style="display: flex; margin-bottom: 15px;">
+                            <h5>Servings: 
+                                <b style="padding-left: 10px;">{{ post.servings }} people</b>
+                            </h5>
+                        </div>
+                    {% endif %}
+                    
+                    <h5>Ingredients: </h5>
+                    {% if post.ingredients %}
+                        <div style="padding-left: 10px;">{{ post.ingredients|linebreaks }}</div>
+                    {% endif %}
+
+                    <h5>Directions: </h5>
+                    {% if post.direction_step %}
+                        <div style="padding-left: 10px;">{{ post.direction_step|linebreaks }}</div>
+                    {% endif %}
+
+                    <h5>Nutrition Facts (per serving): </h5>
+
+                    {% if post.nutrition_calories %}
+                        <div style="display: flex;">
+                            <div style="padding-left: 10px;"><b>Calories: </b></div>
+                            <div style="padding-left: 10px;"><span>{{ post.nutrition_calories }} calories</span></div>
+                        </div>
+                    {% endif %}
+
+                    {% if post.nutrition_carbs %}
+                        <div style="display: flex;">
+                            <div style="padding-left: 10px;"><b>Carbs: </b></div>
+                            <div style="padding-left: 10px;"><span>{{ post.nutrition_carbs }} g</span></div>
+                        </div>
+                    {% endif %}
+
+                    {% if post.nutrition_protein %}
+                        <div style="display: flex;">
+                            <div style="padding-left: 10px;"><b>Protein: </b></div>
+                            <div style="padding-left: 10px;"><span>{{ post.nutrition_protein }} g</span></div>
+                        </div>    
+                    {% endif %}
+                    
+                    {% if post.nutrition_fat %}
+                        <div style="display: flex;">
+                            <div style="padding-left: 10px;"><b>Fat: </b></div>
+                            <div style="padding-left: 10px;"><span>{{ post.nutrition_fat }} g</span></div>
+                        </div>    
+                    {% endif %}
 
                 </div>
                 

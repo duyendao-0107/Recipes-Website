@@ -27,22 +27,73 @@
 
                     <span class="count"> {{ total_views }} view{{ total_views|pluralize }} </span>
 
+                    <p data-aos="fade-up" data-aos-delay="100">{{ post.body|linebreaks }}</p>
 
-                    {% if post.image %}
-                        <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+
+                    {% if post.servings %}
+                        <div style="display: flex; margin-bottom: 15px;">
+                            <h5>Servings: 
+                                <b style="padding-left: 10px;">{{ post.servings }} people</b>
+                            </h5>
+                        </div>
+                    {% endif %}
+                    
+                    <h5>Ingredients: </h5>
+                    {% if post.ingredients %}
+                        <div style="padding-left: 10px;">{{ post.ingredients|linebreaks }}</div>
                     {% endif %}
 
-                    <p data-aos="fade-up" data-aos-delay="100">{{ post.body|linebreaks }}</p>
+                    <h5>Directions: </h5>
+                    {% if post.direction_step %}
+                        <div style="padding-left: 10px;">{{ post.direction_step|linebreaks }}</div>
+                    {% endif %}
+
+                    <h5>Nutrition Facts (per serving): </h5>
+
+                    {% if post.nutrition_calories %}
+                        <div style="display: flex;">
+                            <div style="padding-left: 10px;"><b>Calories: </b></div>
+                            <div style="padding-left: 10px;"><span>{{ post.nutrition_calories }} calories</span></div>
+                        </div>
+                    {% endif %}
+
+                    {% if post.nutrition_carbs %}
+                        <div style="display: flex;">
+                            <div style="padding-left: 10px;"><b>Carbs: </b></div>
+                            <div style="padding-left: 10px;"><span>{{ post.nutrition_carbs }} g</span></div>
+                        </div>
+                    {% endif %}
+
+                    {% if post.nutrition_protein %}
+                        <div style="display: flex;">
+                            <div style="padding-left: 10px;"><b>Protein: </b></div>
+                            <div style="padding-left: 10px;"><span>{{ post.nutrition_protein }} g</span></div>
+                        </div>    
+                    {% endif %}
+                    
+                    {% if post.nutrition_fat %}
+                        <div style="display: flex;">
+                            <div style="padding-left: 10px;"><b>Fat: </b></div>
+                            <div style="padding-left: 10px;"><span>{{ post.nutrition_fat }} g</span></div>
+                        </div>    
+                    {% endif %}
+
+                </div>
+                
+                <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+                    {% if post.image %}
+                        {% if request.user.is_authenticated %}
+                            <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                        {% else %}
+                            <a href="{{ post.get_absolute_url_home }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                        {% endif %}
+                    {% endif %}
 
                     {% if post.video %}
                         <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
                             <a href="{{ post.video.url }}" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
                         </div>
                     {% endif %}
-                </div>
-                
-                <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
-                    <img src="assets/img/hero-img.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
                 </div>
             </div>
         </div>
