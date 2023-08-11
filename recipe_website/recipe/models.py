@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.conf import settings
+from django.utils.text import slugify 
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -12,7 +13,7 @@ class PublishedManager(models.Manager):
 class Post(models.Model):
     STATUS_CHOICES = ( ('draft', 'Draft'), ('published', 'Published'), )
     title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250, unique_for_date='publish')
+    slug = models.SlugField(max_length=250, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipe_posts')
     body = models.TextField(blank=True)
     image = models.ImageField(upload_to='posts/image/%Y/%m/%d/', blank=True)
@@ -43,6 +44,11 @@ class Post(models.Model):
         
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        
+        super(Post, self).save(*args, **kwargs)
     
     def get_absolute_url(self):
         return reverse('recipe:post_detail', args=[self.publish.year, self.publish.month, self.publish.day, self.slug])

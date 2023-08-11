@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'recipe.apps.RecipeConfig',
     'images.apps.ImagesConfig',
+    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [

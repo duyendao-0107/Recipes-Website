@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post
-from .forms import CommentForm, PostCreateForm, PostEditForm
+from .forms import CommentForm, PostCreateForm, PostEditForm, UserCreateForm
 from images.models import Image
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
@@ -100,13 +100,17 @@ def post_detail_home(request, year, month, day, post):
 @login_required
 def post_create(request):
     if request.method == 'POST':
-        
-        post_form = PostCreateForm(data=request.POST, files=request.FILES)
+        post_form = PostCreateForm(data=request.POST, files=request.FILES)        
         
         if post_form.is_valid ():
+            post_form.save(commit=False)
+
+            post_form.instance.author = request.user
+
             post_form.save()
 
             messages.success(request, 'Post updated successfully')
+
             return HttpResponseRedirect("/menu/")
         else:
             messages.error(request, 'Error updating your profile')

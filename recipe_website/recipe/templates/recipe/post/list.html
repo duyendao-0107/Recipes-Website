@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load thumbnail %}
+
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
@@ -54,7 +56,11 @@
 
                         {% for post in posts %}
                             <div class="col-lg-4 menu-item">
-                                <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                                {% if post.image %}
+                                    {% thumbnail post.image 296x296 crop="smart" as im %}
+
+                                    <a href="{{ post.get_absolute_url }}"><img style="padding-bottom: 10px;" src="{{ im.url }}"  alt=""></a>
+                                {% endif %}
                                 
                                 <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
                                 
@@ -81,7 +87,11 @@
 
                         {% for post in posts %}
                             <div class="col-lg-4 menu-item">
-                                <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                                {% if post.image %}
+                                    {% thumbnail post.image 296x296 crop="smart" as im %}
+                                    
+                                    <a href="{{ post.get_absolute_url }}"><img style="padding-bottom: 10px;" src="{{ im.url }}"  alt=""></a>
+                                {% endif %}
                                 
                                 <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
                                 
@@ -109,7 +119,11 @@
 
                         {% for post in posts %}
                             <div class="col-lg-4 menu-item">
-                                <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                                {% if post.image %}
+                                    {% thumbnail post.image 296x296 crop="smart" as im %}
+                                    
+                                    <a href="{{ post.get_absolute_url }}"><img style="padding-bottom: 10px;" src="{{ im.url }}"  alt=""></a>
+                                {% endif %}
                                 
                                 <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
                                 
@@ -137,14 +151,18 @@
 
                         {% for post in posts %}
                             <div class="col-lg-4 menu-item">
-                                <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="menu-img img-fluid" alt=""></a>
+                                {% if post.image %}
+                                    {% thumbnail post.image 296x296 crop="smart" as im %}
+                                    
+                                    <a href="{{ post.get_absolute_url }}"><img style="padding-bottom: 10px;" src="{{ im.url }}"  alt=""></a>
+                                {% endif %}
                                 
                                 <h4><a href="{{ post.get_absolute_url }}"> {{ post.title }} </a></h4>
                                 
                                 <p class="ingredients">
                                     {{ post.body|truncatewords:30|linebreaks }}
                                 </p>
-                                
+
                                 <p class="date"> Published {{ post.publish }} by {{ post.author }} </p>
                                 
                             </div><!-- Menu Item -->
