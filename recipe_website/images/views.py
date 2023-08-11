@@ -61,6 +61,7 @@ def image_like(request):
 
 def image_list(request):
     images = Post.objects.all()
+    
     paginator = Paginator(images, 8)
     page = request.GET.get('page')
     
