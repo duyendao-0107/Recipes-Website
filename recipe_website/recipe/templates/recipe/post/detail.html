@@ -95,7 +95,7 @@
                     {% endif %}
 
                     {% if post.video %}
-                        <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+                        <div class="d-flex" style="padding-top: 20px;" data-aos="fade-up" data-aos-delay="200">
                             <a href="{{ post.video.url }}" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
                         </div>
                     {% endif %}
@@ -113,7 +113,7 @@
         
                 {% for comment in comments %}
                     <div class="comment">
-                        <p class="info"> Comment {{ forloop.counter }} by {{ request.user.first_name }} {{ comment.created }} </p>
+                        <p class="info"> Comment {{ forloop.counter }} by {{ comment.name }} {{ comment.created }} </p>
                         {{ comment.body|linebreaks }}
                     </div>
                     {% empty %}
