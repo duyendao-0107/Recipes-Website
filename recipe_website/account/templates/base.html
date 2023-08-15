@@ -57,7 +57,7 @@
                         <li><a href="{% url "home" %}">Home</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#menu">Menu List</a></li>
-                        <li><a href="#testimonials">People</a></li>
+                        <li><a href="{% url "user_list" %}">People</a></li>
                         <li><a href="{% url "images:list" %}">Gallery</a></li>
                         <li>
                             <form style="margin: 0; padding: 10px 20px;" action="{% url 'search_results' %}" method="get">

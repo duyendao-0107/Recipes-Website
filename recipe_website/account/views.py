@@ -99,3 +99,10 @@ def pw_reset_for_email(request, username=None):
         form = EmailPostForm()
     return render(request, 'registration/password_reset_confirm.html', {'form': form,
                                                                         'sent': sent})
+
+@login_required
+def user_list(request):
+    users = User.objects.filter(is_active=True)
+    
+    return render(request, 'account/user/list.html', {'section': 'people', 
+                                                      'users': users})

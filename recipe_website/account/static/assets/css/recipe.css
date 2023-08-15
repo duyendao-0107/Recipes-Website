@@ -90,3 +90,18 @@ items {
     display: inline-block;
     font-size: 16px;
 }
+
+/* users */
+#people-list img {
+    width:180px;
+    height:180px;
+    border-radius:50%;
+}
+
+#people-list .info { text-align:center; }
+img.user-detail {
+    border-radius:50%;
+    float:left;
+}
+
+.image-container { margin-top:40px; }

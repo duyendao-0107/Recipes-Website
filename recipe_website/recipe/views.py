@@ -11,6 +11,7 @@ from django.views.generic import ListView
 from django.db.models import Q
 import redis
 from django.conf import settings
+from django.contrib.auth.models import User
 
 # connect to redis
 r = redis.Redis(host=settings.REDIS_HOST, 
@@ -19,7 +20,7 @@ r = redis.Redis(host=settings.REDIS_HOST,
 
 @login_required
 def post_list(request):
-    object_list = Post.published.all()
+    object_list = Post.objects.filter(author_id=request.user.id, status= "published")
 
     paginator = Paginator(object_list, 6)
 
